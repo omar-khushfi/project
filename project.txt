@@ -1,0 +1,34 @@
+accounts:
+	login : email password ,signup ,forget password
+	signup : first_name,last_name,username,email,password12,age,country
+	forgetpassword
+	restpassword : email
+	enter code 
+	profile :your information with your graph
+	edite profile :your information
+	folder 
+
+words:
+	my words : all languages or some language ,search, pronunciation
+	one word: pronunciation ,text box for edite with all languages
+	wrong words :delete ,like my words
+	sound words: my worng words , all words
+	sound : sound ,download
+			
+
+
+exam:
+	chois the language
+	exam :word ,pronunciation ,3 words, 5 sec
+	resault :word ,pronunciation ,3 words, resault,next   
+	
+
+
+
+dark/white
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+login : email password ,signup ,forget password
+signup : first_name,last_name,username,email,password12,age,country
+forgetpassword
+restpassword : email
+enter code 
+
+
+
+profile :your information
+edite profile :your information
+
+
+
+my words : all languages or some language ,search, pronunciation
+one word: pronunciation ,text box for edite with all languages
+wrong words :delete ,like my words
+sound words: my worng words , all words
+sound : sound ,download
+
+

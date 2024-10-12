@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern User Profile</title>
+    <link rel="stylesheet" href="style-profile.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-image-section">
+                    <h1 class="profile-name">John Doe</h1>
+                    <p class="profile-username">@johndoe</p>
+                    <button class="edit-profile-btn">Edit Profile</button>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <p class="stat-label">First Name</p>
+                        <p class="stat-value">John</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Last Name</p>
+                        <p class="stat-value">Doe</p>
+                    </div>
+                    <div class="email-stat-card stat-card">
+                        <p class="stat-label">Email</p>
+                        <p class="stat-value">john.doe@example.com</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Age</p>
+                        <p class="stat-value">30</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Country</p>
+                        <p class="stat-value">United States</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-label">Member Since</p>
+                        <p class="stat-value">January 1, 2023</p>
+                    </div>
+                </div>
+            </div>
+            <div class="training-days">
+                <h2>Training Days</h2>
+                <select id="yearSelect"></select>
+                <div class="month-labels">
+                    <!-- سيتم إضافة أسماء الأشهر هنا بواسطة JavaScript -->
+                </div>
+                <div class="training-grid">
+                    <!-- سيتم إضافة أيام السنة هنا بواسطة JavaScript -->
+                </div>
+                
+            </div>
+            <div class="chart-container">
+                <h2>Score Progression</h2>
+                <canvas id="scoreChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('scoreChart').getContext('2d');
+        const scoreChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+                datasets: [{
+                    label: 'Scores',
+                    data: [65, 70, 75, 0, 85, 90, 95],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    fill: true,
+                   
+                }]
+            },
+           options: {
+    responsive: true,
+    scales: {
+        y: {
+            beginAtZero: true,
+            ticks: {
+                font: function(context) {
+                    const width = context.chart.width;
+                    return {
+                        size: width < 768 ? 10 : 14 // تصغير النص في الشاشات الصغيرة
+                    };
+                }
+            }
+        },
+        x: {
+            ticks: {
+                font: function(context) {
+                    const width = context.chart.width;
+                    return {
+                        size: width < 768 ? 10 : 14 // تصغير النص في الشاشات الصغيرة
+                    };
+                }
+            }
+        }
+    },
+    plugins: {
+        legend: {
+            labels: {
+                font: function(context) {
+                    const width = context.chart.width;
+                    return {
+                        size: width < 768 ? 10 : 14 // تصغير النص في الشاشات الصغيرة
+                    };
+                }
+            }
+        }
+    }
+}
+        });
+
+
+
+/////////////////////////////////////////
+
+
+// تحديد السنة الحالية افتراضياً
+const currentYear = new Date().getFullYear();
+
+// دالة لحساب عدد الأيام في السنة (مع مراعاة السنوات الكبيسة)
+function getDaysInYear(year) {
+    return new Date(year, 11, 31).getDate() === 31 ? 366 : 365;
+}
+
+// دالة لتحديد ما إذا كان اليوم يوم تدريب أم لا (يمكن تخصيصها حسب احتياجاتك)
+function isTrainingDay(day) {
+    // هذا مثال بسيط - يمكنك تعديله ليناسب منطق التطبيق الخاص بك
+    const trainingDays = [1, 3, 5, 8, 12, 20, 25, 100, 150, 200];
+    return trainingDays.includes(day);
+}
+
+// الدالة الرئيسية لعرض أيام التدريب
+function renderTrainingDays(year) {
+    const daysInYear = getDaysInYear(year);
+    const grid = document.querySelector('.training-grid');
+    const monthLabels = document.querySelector('.month-labels');
+    
+    // مسح الشبكة وعناوين الأشهر القديمة
+    grid.innerHTML = '';
+    monthLabels.innerHTML = '';
+
+    const today = new Date();
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthColors = [
+    "#FF6B6B", "#4ECDC4", "#45B7D1", "#FFA07A", "#98FB98", "#DDA0DD",
+    "#40E0D0", "#FF69B4", "#BA55D3", "#20B2AA", "#F0E68C", "#FF7F50"
+];
+
+    // إضافة عناوين الأشهر
+    monthNames.forEach((month, index) => {
+        const monthLabel = document.createElement('div');
+        monthLabel.classList.add('month-label');
+        monthLabel.textContent = month;
+        monthLabel.style.gridColumn = index + 1;
+        monthLabel.style.color = monthColors[index]; // تعيين لون الشهر
+        monthLabels.appendChild(monthLabel);
+    });
+
+    // إنشاء مربعات الأيام
+    for (let i = 1; i <= daysInYear; i++) {
+        const dayElement = document.createElement('div');
+        const date = new Date(year, 0, i);
+        const monthIndex = date.getMonth();
+        const monthColor = monthColors[monthIndex];
+
+        // إضافة الفئات الأساسية والنمط
+        dayElement.classList.add('training-day');
+        dayElement.style.borderColor = monthColor; // تعيين لون الإطار
+
+        // تحديد حالة اليوم (مستقبل / تدريب / ماضي)
+        if (date > today) {
+            dayElement.style.backgroundColor = 'white'; // الأيام المستقبلية
+        } else if (isTrainingDay(i)) {
+            dayElement.style.backgroundColor = 'green'; // أيام التدريب
+        } else {
+            dayElement.style.backgroundColor = 'black'; // الأيام التي لم يتم التدريب فيها
+        }
+
+        // إضافة معلومات التاريخ عند التحويم
+        dayElement.setAttribute('title', date.toDateString());
+
+        // إضافة اليوم إلى الشبكة
+        grid.appendChild(dayElement);
+    }
+}
+
+// إعداد عنصر اختيار السنة
+function setupYearSelect() {
+    const yearSelect = document.getElementById('yearSelect');
+    const currentYear = new Date().getFullYear();
+    
+    // إضافة خيارات السنوات (من 2020 إلى السنة الحالية + 5 سنوات)
+    for (let year = 2020; year <= currentYear + 5; year++) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    }
+
+    // تعيين السنة الحالية كقيمة افتراضية
+    yearSelect.value = currentYear;
+
+    // إضافة مستمع الحدث لتحديث العرض عند تغيير السنة
+    yearSelect.addEventListener('change', function() {
+        renderTrainingDays(parseInt(this.value));
+    });
+}
+
+// دالة التهيئة
+function initTrainingDays() {
+    setupYearSelect();
+    renderTrainingDays(currentYear);
+}
+
+// استدعاء دالة التهيئة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', initTrainingDays);
+    </script>
+</body>
+</html>
