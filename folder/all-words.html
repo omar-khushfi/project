@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Multilingual Word List</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5a623;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --border-radius: 8px;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        /* Styles for Top Navigation Bar */
+        .topnav {
+            background-color: #2c3e50;
+            padding: 10px 20px;
+            padding-left: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .topnav .left-menu {
+            display: flex;
+            flex-grow: 1;
+        }
+        .topnav .left-menu a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 16px;
+            display: inline-block;
+        }
+        .topnav .left-menu a:hover {
+            background-color: #34495e;
+        }
+        .search-container-word {
+            flex-grow: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2;
+            margin-bottom: 15px;
+        }
+        .search-container-word input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            width: 150px;
+            margin-right: 10px;
+        }
+        .search-container-word button {
+            padding: 6px 10px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .search-container-word button:hover {
+            background-color: #2980b9;
+        }
+
+
+        .search-container-all {
+            flex-grow: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-container-all input[type="text"] {
+            padding: 6px;
+            margin-right: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+        }
+        .search-container-all button {
+            padding: 6px 10px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .search-container-all button:hover {
+            background-color: #2980b9;
+        }
+
+        .pronounce-icon {
+    font-size: 25px; /* يمكنك تغيير القيمة حسب الحاجة */
+}
+
+
+        .topnav .left-menu {
+            display: flex;
+            flex-grow: 1;
+        }
+        .topnav .left-menu a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 16px;
+            display: inline-block;
+        }
+        .topnav .left-menu a:hover {
+            background-color: #34495e;
+        }
+        .search-container-all {
+            flex-grow: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-container-all input[type="text"] {
+            padding: 6px;
+            margin-right: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+        }
+        .search-container-all button {
+            padding: 6px 10px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .search-container-all button:hover {
+            background-color: #2980b9;
+        }
+        .topnav .profile {
+            display: flex;
+            align-items: center;
+        }
+        .topnav .profile a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 16px;
+        }
+        .side-menu {
+            display: none;
+            background-color: #2c3e50;
+            position: fixed;
+            top: 50px;
+            right: 0;
+            height: calc(100vh - 60px);
+            width: 250px;
+            padding-top: 60px;
+            z-index: 1;
+            overflow-x: hidden;
+        }
+        .side-menu a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+        .side-menu a:hover {
+            background-color: #34495e;
+        }
+        .open-btn {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: transparent;
+            color: #ecf0f1;
+            border: none;
+            display: none;
+        }
+        .open-btn:hover {
+            color: #3498db;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        .controls {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .word-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            
+        }
+        .word-table th, .word-table td {
+            padding: 10px;
+            text-align: left;
+        }
+        .word-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .word-table tr {
+           
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s;
+            padding-left: 50px;
+        }
+        .word-table tr:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .action-buttons button {
+            padding: 6px 12px;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+        .pronounce-icon {
+            color: var(--secondary-color);
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        .edit {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, transform 0.1s;
+            background-color: #7ed321;
+        }
+        .delete {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, transform 0.1s;
+            background-color: #d0021b;
+        }
+        #deleteAll {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, transform 0.1s;
+            background-color: #d0021b;
+        }
+        .select-all-container {
+            display: none; /* الإخفاء بشكل افتراضي */
+        }
+        
+        @media screen and (max-width: 768px) {
+            .select-all-container {
+                display: block; /* يظهر فقط في الشاشات الصغيرة */
+                margin-top: 10px; /* إضافة مسافة أعلى */
+            }
+            .select-all-label {
+                cursor: pointer;
+            }
+            .word-table, .word-table tbody, .word-table tr, .word-table td {
+                display: block;
+            }
+            .word-table thead {
+                display: none;
+            }
+            .word-table tr {
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                padding: 10px;
+                border-radius: var(--border-radius);
+            }
+            .word-table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+            .word-table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                text-align: left;
+            }
+            .action-buttons {
+                text-align: center;
+            }
+            .action-buttons button {
+                margin: 5px;
+            }
+            .checkbox-column {
+                text-align: left !important;
+                padding-left: 10px !important;
+            }
+            .checkbox-column:before {
+                content: none !important;
+            }
+            
+            .topnav .left-menu a {
+                display: none;
+            }
+            .topnav .profile {
+                display: none; /* إخفاء زر "My Profile" على الشاشات الصغيرة */
+            }
+            .open-btn {
+                display: block;
+            }
+            .side-menu {
+                display: none;
+            }
+            .search-container-all {
+                justify-content: center;
+            }
+            .search-container-all input[type="text"] {
+           width: 150px;
+            margin-right: 2px;
+        }
+        }
+        .checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkbox-label {
+  background-color: #111;
+  width: 50px;
+  height: 26px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fa-moon {color: #f1c40f;}
+
+.fa-sun {color: #f39c12;}
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(24px);
+}
+.dark-wight{
+    margin-right: 10px;
+}
+
+    </style>
+    </head>
+    <body>
+        <div class="topnav">
+            <div class="left-menu">
+                <a href="#home">Download vocabulary</a>
+                <a href="#categories">Exam</a>
+            </div>
+            <div class="search-container-all">
+                <input type="text" placeholder="Search for ...">
+                <button type="submit">Search</button>
+            </div>
+
+            <div class="dark-wight">
+                <input type="checkbox" class="checkbox" id="checkbox">
+                <label for="checkbox" class="checkbox-label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
+
+            <div class="profile">
+                <a href="#about">My Profile</a>
+            </div>
+            <button class="open-btn" onclick="openNav()">&#9776;</button>
+        </div>
+
+        <div class="side-menu" id="sideMenu">
+            <a href="#home">Download vocabulary</a>
+            <a href="#categories">Exam</a>
+            <a href="#about">My Profile</a>
+            <!-- إضافة "My Profile" للقائمة الجانبية -->
+        </div>
+
+        <div class="container">
+            <h1>Modern Multilingual Word List</h1>
+            <div class="controls">
+                <div class="search-container-word">
+                    <input type="text" id="searchBox"
+                        placeholder="Search for a word...">
+                    <button id="searchButton">Search</button>
+                </div>
+                <button id="deleteAll">Delete Selected Words</button>
+                <div class="select-all-container">
+                    <label for="selectAllSmall" class="select-all-label">Select
+                        All</label>
+                    <input type="checkbox" id="selectAllSmall">
+                </div>
+            </div>
+            <table class="word-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>Original</th>
+                        <th>English</th>
+                        <th>Spanish</th>
+                        <th>French</th>
+                        <th>Arabic</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="checkbox-column"><input type="checkbox"></td>
+                        <td data-label="Original">Hello <i
+                                class="fas fa-volume-up pronounce-icon"></i></td>
+                        <td data-label="English">Hello <i
+                                class="fas fa-volume-up pronounce-icon"></i></td>
+                        <td data-label="Spanish">Hola <i
+                                class="fas fa-volume-up pronounce-icon"></i></td>
+                        <td data-label="French">Bonjour <i
+                                class="fas fa-volume-up pronounce-icon"></i></td>
+                        <td data-label="Arabic">مرحبا <i
+                                class="fas fa-volume-up pronounce-icon"></i></td>
+                        <td data-label="Actions" class="action-buttons">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </td>
+                    </tr>
+
+                    <!-- إضافة المزيد من الصفوف حسب الحاجة -->
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+        function openNav() {
+            document.getElementById("sideMenu").style.display = "block";
+        }
+
+        document.getElementById("selectAll").addEventListener("change", function(e) {
+            const checkboxes = document.querySelectorAll('.word-table tbody input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = e.target.checked;
+            });
+        });
+
+        document.getElementById("selectAllSmall").addEventListener("change", function(e) {
+            const checkboxes = document.querySelectorAll('.word-table tbody input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = e.target.checked;
+            });
+        });
+
+
+
+           const deleteAllButton = document.getElementById('deleteAll');
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        
+        const wordTableRows = document.querySelectorAll('.word-table tbody tr');
+        
+      
+
+       
+       
+
+        deleteAllButton.addEventListener('click', function() {
+            wordTableRows.forEach(row => {
+                const checkbox = row.querySelector('input[type="checkbox"]');
+                if (checkbox.checked) {
+                    row.remove(); // Remove checked rows
+                }
+            });
+        });
+        document.querySelectorAll('.pronounce-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                alert('Pronunciation feature activated');
+            });
+        });
+
+        document.querySelectorAll('.edit').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Edit window opened');
+            });
+        });
+
+        document.querySelectorAll('.delete').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = button.closest('tr');
+                row.remove();
+                alert('Word deleted');
+            });
+        });
+        function openNav() {
+            if( document.getElementById("sideMenu").style.display == "block")
+             document.getElementById("sideMenu").style.display = "none";
+            else
+             document.getElementById("sideMenu").style.display = "block";
+        }
+    </script>
+    </body>
+</html>
