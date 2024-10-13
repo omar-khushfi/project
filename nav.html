@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Results</title>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet">
+        <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5a623;
+            --background-color: #f0f4f8;
+            --text-color: #333;
+            --border-radius: 8px;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Styles for Top Navigation Bar */
+        .topnav {
+            background-color: #2c3e50;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .topnav .left-menu {
+            display: flex;
+            flex-grow: 1;
+        }
+        .topnav .left-menu a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 16px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .topnav .left-menu a:hover {
+            background-color: #34495e;
+        }
+        .search-container-all {
+            flex-grow: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .search-container-all input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: var(--border-radius);
+            width: 200px;
+            margin-right: 10px;
+            transition: box-shadow 0.3s ease;
+            background-color: #eee;
+        }
+        .search-container-all input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+       .search-container-all button {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease;
+        }
+    .search-container-all button:hover {
+            background-color: #3a7bd5;
+        }
+
+      
+
+        .topnav .profile {
+            display: flex;
+            align-items: center;
+        }
+        .topnav .profile a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .topnav .profile a:hover {
+            background-color: #34495e;
+        }
+        .side-menu {
+            display: none;
+            background-color: #2c3e50;
+            position: fixed;
+            top: 60px;
+            right: 0;
+            height: calc(100vh - 60px);
+            width: 250px;
+            padding-top: 20px;
+            z-index: 1;
+            overflow-x: hidden;
+            transition: 0.5s;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+        .side-menu a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        .side-menu a:hover {
+            background-color: #34495e;
+        }
+        .open-btn {
+            font-size: 24px;
+            cursor: pointer;
+            background-color: transparent;
+            color: #ecf0f1;
+            border: none;
+            display: none;
+            transition: color 0.3s ease;
+        }
+        .open-btn:hover {
+            color: var(--primary-color);
+        }
+       
+        
+        @media screen and (max-width: 768px) {
+          
+          
+            .topnav .left-menu a,.dark-wight-nav {
+                display: none;
+            }
+            .topnav .profile {
+                display: none;
+            }
+            .open-btn {
+                display: block;
+            }
+            .side-menu {
+                display: none;
+            }
+            .search-container-all {
+                justify-content: center;
+            }
+            .search-container-all input[type="text"] {
+                width: 150px;
+                margin-right: 5px;
+            }
+        }
+        .checkbox {
+            opacity: 0;
+            position: absolute;
+        }
+        .checkbox-label {
+            background-color: #111;
+            width: 50px;
+            height: 26px;
+            border-radius: 50px;
+            position: relative;
+            padding: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .fa-moon {color: #f1c40f;}
+        .fa-sun {color: #f39c12;}
+        .checkbox-label .ball {
+            background-color: #fff;
+            width: 22px;
+            height: 22px;
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            border-radius: 50%;
+            transition: transform 0.2s linear;
+        }
+        .checkbox:checked + .checkbox-label .ball {
+            transform: translateX(24px);
+        }
+        .dark-wight,.dark-wight-nav{
+            margin: auto;
+            
+        }
+        
+    </style>
+    </head>
+    <body>
+        <div class="topnav">
+            <div class="left-menu">
+                <a href="#home">Download vocabulary</a>
+                <a href="#categories">Exam</a>
+                
+            </div>
+            <div class="search-container-all">
+                <input type="text" placeholder="Search for ...">
+                <button type="submit">Search</button>
+            </div>
+            <div class="dark-wight-nav">
+                <input type="checkbox" class="checkbox" id="checkbox">
+                <label for="checkbox" class="checkbox-label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
+            <div class="profile">
+                <a href="#about">My Profile</a>
+            </div>
+            <button class="open-btn" onclick="openNav()">&#9776;</button>
+        </div>
+
+        <div class="side-menu" id="sideMenu">
+            <div class="dark-wight">
+                <input type="checkbox" class="checkbox" id="checkbox">
+                <label for="checkbox" class="checkbox-label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
+            <a href="#home">Download vocabulary</a>
+            <a href="#categories">Exam</a>
+            <a href="#about">My Profile</a>
+            <!-- إضافة "My Profile" للقائمة الجانبية -->
+        </div>
+        <script>
+         function openNav() {
+            if( document.getElementById("sideMenu").style.display == "block")
+             document.getElementById("sideMenu").style.display = "none";
+            else
+             document.getElementById("sideMenu").style.display = "block";
+        }
+        const checkboxTopnav = document.querySelector('.topnav .checkbox');
+        const checkboxSideMenu = document.querySelector('.side-menu .checkbox');
+
+        checkboxTopnav.addEventListener('change', () => {
+            checkboxSideMenu.checked = checkboxTopnav.checked;
+        });
+
+        checkboxSideMenu.addEventListener('change', () => {
+            checkboxTopnav.checked = checkboxSideMenu.checked;
+        });
+    </script>
+    </body>
+</html>

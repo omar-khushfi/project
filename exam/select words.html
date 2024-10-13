@@ -332,35 +332,56 @@
     </div>
 
     <div class="container">
-        <section class="results-section">
-            <h1>Search Results</h1>
-            <table class="word-table">
-                <thead>
-                    <tr>
-                        <th>Original</th>
-                        <th>English</th>
-                        <th>Spanish</th>
-                        <th>French</th>
-                        <th>Arabic</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Original">Hello <i class="fas fa-volume-up pronounce-icon"></i></td>
-                        <td data-label="English">Hello <i class="fas fa-volume-up pronounce-icon"></i></td>
-                        <td data-label="Spanish">Hola <i class="fas fa-volume-up pronounce-icon"></i></td>
-                        <td data-label="French">Bonjour <i class="fas fa-volume-up pronounce-icon"></i></td>
-                        <td data-label="Arabic">مرحبا <i class="fas fa-volume-up pronounce-icon"></i></td>
-                        <td data-label="Actions" class="action-buttons">
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </section>
+        <h1>Modern Multilingual Word List</h1>
+        <div class="controls">
+            <div class="search-container-word">
+                <input type="text" id="searchBox"
+                    placeholder="Search for a word...">
+                <button id="searchButton">Search</button>
+            </div>
+           <div class="container-button-delete-all"> <button id="deleteAll">Delete Selected Words</button></div>
+            <div class="select-all-container">
+                <label for="selectAllSmall" class="select-all-label">Select
+                    All</label>
+                <input type="checkbox" id="selectAllSmall">
+            </div>
+        </div>
+        <table class="word-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="selectAll"></th>
+                    <th>Original</th>
+                    <th>English</th>
+                    <th>Spanish</th>
+                    <th>French</th>
+                    <th>Arabic</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="checkbox-column"><input type="checkbox"></td>
+                    <td data-label="Original">Hello <i
+                            class="fas fa-volume-up pronounce-icon"></i></td>
+                    <td data-label="English">Hello <i
+                            class="fas fa-volume-up pronounce-icon"></i></td>
+                    <td data-label="Spanish">Hola <i
+                            class="fas fa-volume-up pronounce-icon"></i></td>
+                    <td data-label="French">Bonjour <i
+                            class="fas fa-volume-up pronounce-icon"></i></td>
+                    <td data-label="Arabic">مرحبا <i
+                            class="fas fa-volume-up pronounce-icon"></i></td>
+                    <td data-label="Actions" class="action-buttons">
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </td>
+                </tr>
+
+                <!-- إضافة المزيد من الصفوف حسب الحاجة -->
+            </tbody>
+        </table>
+   
+
 
         <section class="folders-section">
             <h2>Folders</h2>

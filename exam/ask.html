@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Button Effects</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff416c;
+            --secondary-color: #ff4b2b;
+            --button-bg-color: linear-gradient(to right, #ff4b2b, #ff416c);
+            --background-color: #1e1e1e;
+            --text-color: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10; /* Ensure buttons are above falling text */
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 50px;
+            font-size: 18px;
+            color: var(--text-color);
+            background-image: var(--button-bg-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
+            transition: all 0.6s ease;
+            transform: scale(0);
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            transform: scale(1);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .btn:hover {
+            background-image: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: #fff;
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .falling-text {
+            position: absolute;
+            top: -50px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            animation: fall 2s ease-in-out forwards, rotate 2s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .btn {
+                padding: 12px 40px;
+                font-size: 16px;
+            }
+
+            .buttons {
+                gap: 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 10px 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Select</h1>
+        <div class="buttons">
+            <button class="btn" id="allWordsBtn"><i class="fas fa-globe"></i>All Words</button>
+            <button class="btn" id="selectWordsBtn"><i class="fas fa-hand-pointer"></i>Select Words</button>
+        </div>
+    </div>
+
+    <script>
+        const words = [
+            'مرحبًا',   // Arabic
+            'Hello',    // English
+            'Bonjour',  // French
+            'Hola',     // Spanish
+            'Ciao',     // Italian
+            'Hallo',    // German
+            'Olá',      // Portuguese
+            'नमस्ते',   // Hindi
+            'こんにちは', // Japanese
+            '안녕하세요'   // Korean
+        ];
+
+        let isClicked = false; // متغير للتحقق من حالة النقر
+
+        function createFallingTexts() {
+            if (isClicked) return; // إذا تم النقر بالفعل، لا نفعل شيئًا
+            isClicked = true; // تعيين حالة النقر إلى true
+
+            let numWords = 80; // عدد الكلمات الافتراضي
+            let time=20;
+
+            // تقليل عدد الكلمات على الشاشات الصغيرة
+            if (window.innerWidth < 768) {
+                numWords = 50; // تقليل عدد الكلمات إلى 50 عند عرض الشاشة أقل من 768 بيكسل
+                time=80;
+            }
+            if (window.innerWidth < 480) {
+                numWords = 20; // تقليل عدد الكلمات إلى 20 عند عرض الشاشة أقل من 480 بيكسل
+                time=80;
+            }
+
+            for (let i = 0; i < numWords; i++) { // عدد الكلمات المتساقطة
+                setTimeout(() => {
+                    const text = document.createElement('div');
+                    text.classList.add('falling-text');
+                    text.textContent = words[Math.floor(Math.random() * words.length)];
+
+                    // تحديد موضع عشوائي من اليسار أو اليمين
+                    const randomX = Math.random() * (window.innerWidth - 200); // عرض الشاشة - عرض النص
+                    text.style.left = `${randomX}px`;
+
+                    document.body.appendChild(text);
+
+                    // Remove the element after animation ends
+                    text.addEventListener('animationend', () => {
+                        text.remove();
+                    });
+                }, i * time); // إضافة توقيت بين الكلمات (20 مللي ثانية)
+            }
+        }
+
+        // Button functionality
+        document.getElementById('allWordsBtn').addEventListener('click', createFallingTexts);
+        document.getElementById('selectWordsBtn').addEventListener('click', createFallingTexts);
+    </script>
+</body>
+</html>
